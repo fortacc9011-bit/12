@@ -1,10 +1,11 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>discord.gg/uaee</title>
+    <title>  </title>
+
     <style>
         body {
             margin: 0;
@@ -20,38 +21,50 @@
             flex-direction: column;
             text-align: center;
         }
+
         .image-container img {
-            width: 750px; 
+            width: 750px;
             height: auto;
-            border: 2px solid #0000ff; 
+            border: 2px solid #0000ff;
             border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 0, 255, 0.7); 
+            box-shadow: 0 0 15px rgba(0, 0, 255, 0.7);
         }
+
         .info {
             margin-top: 20px;
             font-size: 1.5em;
-            color: #0000ff; 
-            text-shadow: 0px 0px 8px #0000ff, 0px 0px 15px #0000ff, 0px 0px 25px #0000ff; 
-            letter-spacing: 4.5px; 
+            color: #0000ff;
+            text-shadow: 0px 0px 8px #0000ff,
+                         0px 0px 15px #0000ff,
+                         0px 0px 25px #0000ff;
+            letter-spacing: 4.5px;
             white-space: pre-wrap;
         }
+
         .text {
             margin-top: 20px;
-            font-size: 3em; 
-            color: #0000ff; 
-            text-shadow: 0px 0px 8px #0000ff, 0px 0px 15px #0000ff, 0px 0px 25px #0000ff; 
-            letter-spacing: 4.5px; 
+            font-size: 3em;
+            color: #0000ff;
+            text-shadow: 0px 0px 8px #0000ff,
+                         0px 0px 15px #0000ff,
+                         0px 0px 25px #0000ff;
+            letter-spacing: 4.5px;
         }
     </style>
 </head>
+
 <body>
+
     <div class="image-container">
         <img src="https://l.top4top.io/p_3454tfxhy1.jpg" alt="Discord Image">
     </div>
-    <audio autoplay loop>
-        <source src="https://www.youtube.com/watch?v=uOaA-D10sBk" type="audio/mpeg">
+
+    <!-- الأغنية -->
+    <audio id="bgMusic" autoplay loop>
+        <source src="11.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+
     <div class="info" id="ip-info">
         <strong>IP: <span id="ip"></span></strong><br>
         <span><strong>City:</strong> <span id="city"></span></span><br>
@@ -61,16 +74,38 @@
         <span><strong>Organization:</strong> <span id="org"></span></span><br>
         <span><strong>Timezone:</strong> <span id="timezone"></span></span>
     </div>
-    <div class="text">  </div>
+
+    <div class="text"></div>
 
     <script>
-         fetch('https://ipinfo.io/json')
-        .then(response => response.json())
-        .then(data => {
-            delete data.readme;
-            const infoDiv = document.getElementById('ip-info');
-            infoDiv.textContent = JSON.stringify(data, null, 2);
+        // محاولة تشغيل الأغنية فور فتح الصفحة
+        window.addEventListener("load", function () {
+            const music = document.getElementById("bgMusic");
+
+            music.volume = 1.0;
+
+            const playPromise = music.play();
+
+            if (playPromise !== undefined) {
+                playPromise.catch(function (error) {
+                    console.log("Autoplay blocked by browser:", error);
+                });
+            }
         });
+
+        // جلب معلومات IP
+        fetch('https://ipinfo.io/json')
+            .then(response => response.json())
+            .then(data => {
+                delete data.readme;
+                const infoDiv = document.getElementById('ip-info');
+                infoDiv.textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                console.error('Error fetching IP information:', error);
+            });
     </script>
+
 </body>
 </html>
+```
